@@ -1,0 +1,153 @@
+/* General Body */
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background: #1a1a1a;
+    color: #eee;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+header {
+    background: #111;
+    color: #e74c3c;
+    padding: 2rem 1rem;
+    text-align: center;
+    border-bottom: 2px solid #e74c3c;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+header h1 {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 2.5rem;
+    margin: 0.2rem 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+header h2 {
+    font-weight: normal;
+    font-size: 1.5rem;
+    color: #f39c12;
+}
+
+header nav a {
+    color: #e74c3c;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+header nav a:hover {
+    color: #f39c12;
+    text-shadow: 0 0 5px #f39c12;
+}
+
+/* Main Section Containers as “Evidence Cards” */
+main {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+section {
+    background: #222;
+    border-left: 6px solid #e74c3c;
+    padding: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    transition: transform 0.5s, box-shadow 0.3s;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+section:hover {
+    transform: scale(1.03) rotate(-1deg);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.7);
+}
+
+/* Section Titles as Flippable Header */
+section h3 {
+    font-family: "Courier New", Courier, monospace;
+    color: #e74c3c;
+    margin-top: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    transition: transform 0.4s;
+}
+
+section:hover h3 {
+    transform: rotateY(180deg);
+}
+
+/* Pop-up “Evidence Notes” on Hover */
+section p, section ul {
+    opacity: 0.95;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+section:hover p, section:hover ul {
+    transform: translateY(-5px);
+    opacity: 1;
+}
+
+ul li {
+    margin: 0.5rem 0;
+    position: relative;
+}
+
+ul li::before {
+    content: "⚠️";
+    margin-right: 0.5rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background: #111;
+    color: #f39c12;
+    border-top: 2px solid #e74c3c;
+    box-shadow: 0 -4px 6px rgba(0,0,0,0.3);
+}
+
+/* Links inside sections appear like file tabs */
+section a {
+    color: #f39c12;
+    text-decoration: none;
+    border-bottom: 1px dotted #f39c12;
+    transition: all 0.3s;
+}
+
+section a:hover {
+    color: #e74c3c;
+    text-shadow: 0 0 5px #e74c3c;
+    transform: scale(1.05);
+}
+
+/* Pop-up tooltips for additional insights */
+section ul li:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 105%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #e74c3c;
+    color: #fff;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+section ul li:hover::after {
+    opacity: 1;
+}
