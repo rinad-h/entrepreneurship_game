@@ -1,4 +1,4 @@
-/* General Body */
+/* ----------------- General Body ----------------- */
 body {
     font-family: "Helvetica Neue", Arial, sans-serif;
     background: #1a1a1a;
@@ -7,7 +7,7 @@ body {
     padding: 0;
 }
 
-/* Header */
+/* ----------------- Header ----------------- */
 header {
     background: #111;
     color: #e74c3c;
@@ -25,26 +25,26 @@ header h1 {
     letter-spacing: 2px;
 }
 
-header h2 {
+header h2{
     font-weight: normal;
     font-size: 45px;
     color: #f39c12;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 0.2rem 0;
 }
 
-
-
-/* Main Section Containers as “Evidence Cards” */
+/* ----------------- Main Grid ----------------- */
 main {
     max-width: 1000px;
     margin: 2rem auto;
     padding: 0 1rem;
     display: grid;
-    gap: 2rem;
+    gap: 2rem; /* restore original gap for index page */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-section {
+/* ----------------- Index Page Sections (Evidence Cards) ----------------- */
+.index-section {
     background: #222;
     border-left: 6px solid #e74c3c;
     padding: 1.5rem;
@@ -55,13 +55,12 @@ section {
     overflow: hidden;
 }
 
-section:hover {
+.index-section:hover {
     transform: scale(1.03) rotate(-1deg);
     box-shadow: 0 10px 20px rgba(0,0,0,0.7);
 }
 
-/* Section Titles as Flippable Header */
-section h3 {
+.index-section h3 {
     font-family: "Courier New", Courier, monospace;
     color: #e74c3c;
     margin-top: 0;
@@ -72,29 +71,63 @@ section h3 {
     font-size: 24px;
 }
 
-
-/* Pop-up “Evidence Notes” on Hover */
-section p, section ul {
+.index-section p,
+.index-section ul {
     opacity: 0.95;
     transition: transform 0.3s, opacity 0.3s;
 }
 
-section:hover p, section:hover ul {
+.index-section:hover p,
+.index-section:hover ul {
     transform: translateY(-5px);
     opacity: 1;
 }
 
-ul li {
+.index-section ul li {
     margin: 0.5rem 0;
     position: relative;
 }
 
-ul li::before {
+.index-section ul li::before {
     content: "⚠️";
     margin-right: 0.5rem;
 }
 
-/* Footer */
+.index-section a {
+    color: #f39c12;
+    text-decoration: none;
+    border-bottom: 1px dotted #f39c12;
+    transition: all 0.3s;
+    font-size: 20px;
+}
+
+.index-section a:hover {
+    color: #e74c3c;
+    text-shadow: 0 0 5px #e74c3c;
+    transform: scale(1.05);
+}
+
+/* Flip effect for h3 only */
+.index-section:hover h3.flippable {
+    transform: rotateY(180deg);
+}
+
+/* ----------------- Images inside index sections ----------------- */
+.index-section img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1rem auto 0 auto;
+    border: 2px solid #444;
+    border-radius: 8px;
+}
+
+.index-section img:hover {
+    border-color: #e74c3c;
+    box-shadow: 0 0 10px #e74c3c;
+}
+
+/* ----------------- Footer ----------------- */
 footer {
     text-align: center;
     padding: 1.5rem;
@@ -104,49 +137,79 @@ footer {
     box-shadow: 0 -4px 6px rgba(0,0,0,0.3);
 }
 
-/* Links inside sections appear like file tabs */
-section a {
-    color: #f39c12;
-    text-decoration: none;
-    border-bottom: 1px dotted #f39c12;
-    transition: all 0.3s;
-    font-size: 20px;
+/* ----------------- Other Pages Card Flip ----------------- */
+.card {
+    perspective: 1000px;
+    cursor: pointer;
 }
 
-section a:hover {
-    color: #e74c3c;
-    text-shadow: 0 0 5px #e74c3c;
-    transform: scale(1.05);
+.card-inner {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    transition: transform 0.8s, height 0.4s ease;
+    transform-style: preserve-3d;
+    margin: 0 auto;
 }
 
-/* Pop-up tooltips for additional insights */
-section ul li:hover::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    left: 105%;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #e74c3c;
-    color: #fff;
-    padding: 0.3rem 0.5rem;
-    font-size: 0.85rem;
-    border-radius: 4px;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-}
-
-section ul li:hover::after {
-    opacity: 1;
-}
-
-/* Only flip h3s with .flippable class */
-section:hover h3.flippable {
+.card:hover .card-inner {
     transform: rotateY(180deg);
+    height: auto;
 }
-/* Images inside evidence sections */
-section img {
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    border-left: 6px solid #e74c3c;
+    background: #222;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.card-front {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-front h3 {
+    font-family: "Courier New", Courier, monospace;
+    color: #e74c3c;
+    font-size: 24px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.card-back p,
+.card-back ul {
+    margin: 0;
+    opacity: 0.95;
+}
+
+.card-back ul li {
+    margin: 0.5rem 0;
+    position: relative;
+}
+
+.card-back ul li::before {
+    content: "⚠️";
+    margin-right: 0.5rem;
+}
+
+.card-back img {
     display: block;
     max-width: 100%;
     height: auto;
@@ -155,7 +218,7 @@ section img {
     border-radius: 8px;
 }
 
-section img:hover {
+.card-back img:hover {
     border-color: #e74c3c;
     box-shadow: 0 0 10px #e74c3c;
 }
