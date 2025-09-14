@@ -195,8 +195,8 @@ footer {
 
 .card-back p,
 .card-back ul {
-     list-style: none; /* remove default bullets */
-    padding-left: 1.2rem; /* adjust spacing so text doesn't touch the edge */
+     list-style: none; 
+    padding-left: 1.2rem; 
 }
 
 .card-back ul li {
@@ -206,12 +206,11 @@ footer {
 }
 
 .card-back ul.root-causes li::before {
-    content: "⚠️"; /* your emoji bullet */
+    content: "⚠️"; 
     position: absolute;
     left: 0;
 }
 
-/* Example: another class with a different emoji */
 .card-back ul.Mitigations li::before {
     content: "🛡️";
     position: absolute;
