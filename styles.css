@@ -195,18 +195,27 @@ footer {
 
 .card-back p,
 .card-back ul {
-    margin: 0;
-    opacity: 0.95;
+     list-style: none; /* remove default bullets */
+    padding-left: 1.2rem; /* adjust spacing so text doesn't touch the edge */
 }
 
 .card-back ul li {
-    margin: 0.5rem 0;
+    padding-left: 1.8rem;
     position: relative;
+     margin-bottom: 0.5rem;
 }
 
-.card-back ul li::before {
-    content: "⚠️";
-    margin-right: 0.5rem;
+.card-back ul.root-causes li::before {
+    content: "⚠️"; /* your emoji bullet */
+    position: absolute;
+    left: 0;
+}
+
+/* Example: another class with a different emoji */
+.card-back ul.Mitigations li::before {
+    content: "🛡️";
+    position: absolute;
+    left: 0;
 }
 
 .card-back img {
@@ -222,3 +231,4 @@ footer {
     border-color: #e74c3c;
     box-shadow: 0 0 10px #e74c3c;
 }
+
